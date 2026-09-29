@@ -132,6 +132,7 @@ def explore(heights, min_effort, visited, row, col, current_effort):
             new_effort = max(current_effort, edge_diff)
             min_effort = explore(heights, min_effort, visited, next_row, next_col, new_effort)
     visited[row][col] = False
+    return min_effort # I missed this line earlier. This is important, when the function return from non-pruned, non-destination call. Else the function will return None causing comparison will None and int, thus causing error and termination.
         
 ```
         
