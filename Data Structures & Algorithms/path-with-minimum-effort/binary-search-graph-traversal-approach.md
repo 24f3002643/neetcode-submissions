@@ -1,4 +1,15 @@
-Minimum_Path_Effort(heights):
+Here is the key Idea :
+1. We want to find the smallest possible minimum effort E that can reach to destination.
+2. That means there exist a particular value of E for which there is no valid path with values < E, satisfying condition of question. Also, there exists a path for all values > E, satisfying the condition of question.
+3. So We find the range of possible value of E which is [0, max height - min height]
+4. We then apply binary search on this range, to find out the minimum value of E.
+    - So in binary search, we use either dfs/bfs to check whether destination is reachable from the source with this value of E.
+    - If yes, we narrow down the search space to left half.
+    - If no, we narrow down the search space to right half.
+
+
+
+Minimum_Path_Effort(heights):value
 - find min height
 - find max height
 - low = 0
