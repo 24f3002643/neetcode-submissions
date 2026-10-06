@@ -39,7 +39,8 @@ def minimumPathEffort(heights):
     pq = [] # priority queue
     rows, cols = len(heights), len(heights[0])
     visited = [[False] * cols for i in range(rows)]
-    effort = [[0] * cols for i in range(rows)]
+    effort = [[float('infinity')] * cols for i in range(rows)] # float('inf') can also work
+    effort[0][0] = 0
     # setting up values of priority queue
     # the heap represents the vertices/candidates that are currently available to be processed. Initially, only source is available
     heapq.heappush(pq, (0,0,0))
@@ -56,11 +57,15 @@ def minimumPathEffort(heights):
             next_row = row + dr
             next_col = col + dc
             if  0 <= next_row < rows and 0 <= next_col <cols and not visited[next_row][next_col]:
-                new_effort = max(effort[next_row][next_col], abs(heights[row][col] - heights[next_row][next_col]))
+                new_effort = max(effort[row][col], abs(heights[row][col] - heights[next_row][next_col]))
                 if new_effort < effort[next_row][next_col]:
                     effort[next_row][next_col] = new_effort
                     heapq.heappush(pq, (new_effort, next_row, next_col))
-                
-                
+    # The heapq class does not provide a decrease-key operation. That's why the entry for a cell/vertex with new effort need to be pushed again.
+    # It may happen that the pop form heapq is the one with stale/previous effort. To handle this, there are two solutions :
+    # 1. Use visited array. It works here that any new push for a cell into heapq will always have smaller effort than the previous push. And the heap guarantees that the smallest-priority entry among all entries currently in the heap is popped first. So any first pop for a cell/vertex, will always be with optimal effort. Later on, if any entry pops for the same cell/vertex, the cell would have already been marked visited, and that iteration will be skipped.
+    # 2. Use effort array. If the popped effort for a cell is not equal to effort the array, skip the iteration. This works that for a given cell because whenever effort[v] is updated, the new value is strictly smaller than its previous value.
+    # This program uses visited array approach to handle stale entry.
+    # This all handling is because python does not provide in-built priority queue with decrease key operation. If implemented in another language that provides priority queue with decrease key operation, all this handling would have been avoided.
 
 ```
