@@ -6,7 +6,7 @@
     1. s[i:j] is in wordDict.
     2. dp[j] == True
     
-Algorithm :
+### Algorithm :
 WORD-BREAK(s, wordDict):
 - n = s.length
 - dp = [None] * n
@@ -35,18 +35,28 @@ WORD-BREAK(s, wordDict):
 -           break
 - return dp[0]
 
-Code
+### Code
 ```python
 def wordBreak(s, wordDict):
     n = len(s)
-    wordDict = set(wodDict) #the list has been converted into set for faster lookup
+    wordDict = set(wordDict) #the list has been converted into set for faster lookup
     dp = [False] * (n+1)
     dp[n] = True
-    for i in (n-1, -1, -1):
-        for j in (i+1, n+1):
+    for i in range(n-1, -1, -1):
+        for j in range(i+1, n+1):
             if s[i:j] in wordDict and dp[j] == True:
                 dp[i] = True
                 break
     return dp[0]
+    # converting wordDict into set is what meant hashing here. It improves lookup to average O(1), after hashing the word.
 ```
 
+
+### Complexity
+- Outer loop runs for n times, and in worst case, inner loop runs for n times. Thus giving O(n2) for substring checks.
+- Each string slicing costs up to O(n).
+- The above two combined gives O(n3) time complexity.
+
+Note :
+    - If `wordDict` is a list, then membership checks can also require searching the list. If W is the number of dictionary words and L is their maximum length, the overall time complexity is O(n3 + n2WL).
+    
