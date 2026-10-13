@@ -135,11 +135,35 @@ def wordBreak(s, wordDict):
         for j in range(i, n):
             if s[j] in node.children: # is the current character the child of the current node?
                 node = node.children[s[j]] # if yes, then traverse to the child
-                if node.end_of_word = True :
+                if node.end_of_word :
                     if dp[j+1] == True: # checking if the remaining suffix is segmentable or not.
                         dp[i] = True
                         break
             else :
                 break # if not, then stop traversing for that i
+    
+    return dp[0]
             
 ```
+
+
+## Complexity
+- `n` = length of s
+- `L` = length of the longest word in wordDict
+- `T` = total number of characters across all words in wordDict
+
+### Time Complexity
+- Building the Trie: `O(T)` 
+    - We insert every dictionary word character by character. In general, insertion takes `O(T)` time.
+- Filling the DP array: `O(n min(n,L))`
+    - The outer loop processes all n starting indices, and for each index i, the inner loop traverses the Trie using character of s. 
+    - How many character the combination of both loop inspect at max ?
+        - At most, n characters of string s (outer loop), and at most, L characters in Trie (inner loop).
+    -  Each starting index requires at most `O(min(n,L))` traversal steps.
+    - Therefore, across all n starting indices, `O(n min(n, L))`
+- Building trie and filling dp array gives total time complexity : `O(T + n min(n,L))`
+
+### Space Complexity
+- Trie has `O(T)`, since the trie has atmost T+1 nodes.
+- DP array has `O(n)`.
+- Therefore, the auxillary space becomes `O(T+n)`
