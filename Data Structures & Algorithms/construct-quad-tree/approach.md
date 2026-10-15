@@ -87,3 +87,20 @@ def constructQuadTree(grid, r1, r2, c1, c2):
     return root
 ```
 
+## Complexity
+### Time Complexity
+```
+# The below time complexity is clear, but  the language is not clear.
+- In the worst case, every cell of the grid need to be visited to check the value its contains. So this becomes `O(n2)`.
+- Also, each cell will be checked at most `log n` times, in the worst case.
+- This makes it `O(n2 log n)`
+```
+
+- At each recursion level, the total number of cells that will be checked across all regions is at most `O(n2)`.
+- The grid can be divided in half along each dimension at every level, giving `O(log n)` levels.
+- Therefore, the worst case time complexity is `O(n2 log n)`
+
+### Space Complexity
+- `O(log n)` due to recursion stack.
+- `O(n2)` due to quad tree that will be formed.
+- This makes space complexity `O(n2)` in worst case.
