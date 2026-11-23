@@ -1,4 +1,5 @@
-# Naive Solution
+# Brute Force 2 - Method 1
+# Sorting and Hash Table
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         dic = {}

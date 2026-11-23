@@ -1,3 +1,5 @@
+# Brute Force 1 
+# Frequency Array and Comparing against each other
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         anagram_list = []
@@ -39,4 +41,5 @@ class Solution:
             if i != 0:
                 return False
         return True
+        
         

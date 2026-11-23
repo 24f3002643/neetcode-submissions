@@ -1,3 +1,5 @@
+# Optimized Code
+# Frequency Array and Hash Table
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         n = len(strs)
@@ -5,8 +7,6 @@ class Solution:
         for i in strs:
             array = [0] * 26
             for j in i:
-                # print(j)
-                # print(ord(j) - ord('a'))
                 array[ord(j) - ord('a')] += 1
             if tuple(array) not in dic:
                 dic[tuple(array)] = []
