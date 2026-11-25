@@ -12,3 +12,4 @@ class Solution:
             nums[i] = lst[i]
         
         return len(lst)
+
