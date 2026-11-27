@@ -1,4 +1,4 @@
-# Brute Force
+# Sorting
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
         nums.sort()
